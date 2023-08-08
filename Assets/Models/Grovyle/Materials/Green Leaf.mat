@@ -103,10 +103,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Brightness_Rim: 0.29
-    - Rim_Power: 0.42
-    - Toon_Ramp_Offset: 0.667
-    - Toon_Ramp_Smoothness: 0
+    - Brightness_Rim: 0.74
+    - Rim_Power: 0.3
+    - Toon_Ramp_Offset: 0.544
+    - Toon_Ramp_Smoothness: 0.11
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
@@ -136,14 +136,20 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
+    - _Step: 0.9
+    - _Step2: 0
+    - _Step3: 0
+    - _StepA: 0.41
     - _Surface: 0
     - _UVSec: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _step2: 0
     m_Colors:
-    - Toon_Ramp_Tint: {r: 0.7924528, g: 0.7005148, b: 0.58686364, a: 1}
+    - Toon_Ramp_Tint: {r: 0.9150943, g: 0.840635, b: 0.7467515, a: 1}
     - _BaseColor: {r: 0.23626065, g: 0.33962262, b: 0.078497685, a: 1}
     - _Color: {r: 0.23626062, g: 0.3396226, b: 0.07849767, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Power: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
