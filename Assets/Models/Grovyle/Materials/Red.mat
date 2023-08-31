@@ -104,9 +104,9 @@ Material:
     m_Ints: []
     m_Floats:
     - Brightness_Rim: 0.74
-    - Rim_Power: 0.3
-    - Toon_Ramp_Offset: 0.544
-    - Toon_Ramp_Smoothness: 0.11
+    - Rim_Power: 0
+    - Toon_Ramp_Offset: 0.388
+    - Toon_Ramp_Smoothness: 0.5
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
@@ -114,6 +114,7 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _Contrast: 1.27
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -141,6 +142,8 @@ Material:
     - _Step3: 0
     - _StepA: 0.41
     - _Surface: 0
+    - _Temp: 0
+    - _Tint: 0
     - _UVSec: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
@@ -148,7 +151,9 @@ Material:
     m_Colors:
     - Toon_Ramp_Tint: {r: 0.9150943, g: 0.840635, b: 0.7467515, a: 1}
     - _BaseColor: {r: 0.6698113, g: 0.24477486, b: 0.0979441, a: 1}
-    - _Color: {r: 0.6698113, g: 0.24477482, b: 0.09794406, a: 1}
+    - _Base_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.5471698, g: 0.20996173, b: 0.09549662, a: 1}
+    - _Contrast_Color: {r: 0.5660378, g: 0.5111575, b: 0.32306874, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Power: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

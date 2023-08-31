@@ -23,6 +23,39 @@ public class MovementJumpGravity : State
     int MoveXAniParaId;
     int MoveZAniParaId;
 
+    SariaInputActions SariaControls;
+
+    Vector2 moveDirection = Vector2.zero;
+    private InputAction moveAction;
+    private InputAction jumpAction;
+    private InputAction shieldAction;
+    private InputAction crouchAction;
+
+    private void Awake()
+    {
+        SariaControls = new SariaInputActions();
+    }
+
+    private void OnEnable()
+    {
+        moveAction = SariaControls.Player.Move;
+        moveAction.Enable();
+        jumpAction = SariaControls.Player.Jump;
+        jumpAction.Enable();
+        shieldAction = SariaControls.Player.Shield;
+        shieldAction.Enable();
+        crouchAction = SariaControls.Player.Crouch;
+        crouchAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        moveAction.Disable();
+        jumpAction.Disable();
+        shieldAction.Disable();
+        crouchAction.Disable();
+    }
+
     public override void SetValues(PlayerActor playerActor)
     {
         this._pA = playerActor;
@@ -143,7 +176,7 @@ public class MovementJumpGravity : State
     
     Vector2 magAndVector()
     {
-        Vector2 v = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 v = moveAction.ReadValue<Vector2>();
 
         // animation speed based on magnitute of input axis
 
@@ -347,7 +380,7 @@ public class MovementJumpGravity : State
 
     void setShieldAngle()
     {
-        Vector3 v = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector3 v = moveAction.ReadValue<Vector2>();
         Vector3 v2 = _pA.ShieldTargetCrouch.transform.localPosition;
         Vector3 pos = _pA.ShieldTargetCrouch.transform.position;
         pos = new Vector3(v2.x + (v.x * _pA.shieldMaxAngle), v2.y + (v.y * _pA.shieldMaxAngle), v2.z);
@@ -378,7 +411,7 @@ public class MovementJumpGravity : State
                 }
 
                 // jump
-                if (Input.GetButton("Jump"))
+                if (jumpAction.IsPressed())
                     if (isStrafing && !_pA.isHoldingObject)
                         jump();
             }
@@ -389,23 +422,23 @@ public class MovementJumpGravity : State
                 _pA.fallVelocity = _pA.groundedGravity;
                 Transition(false, "Strafe");
             }
-            else if (Input.GetButtonUp("Crouch"))
+            else if (crouchAction.WasReleasedThisFrame())
                 _pA.anim.CrossFade("Air", 0.0f, 0, 0.0f, 0.0f);
         }
         if (isStrafing)
         {
             // shield stuff
-            if (Input.GetButtonDown("Shield") || Input.GetButtonDown("Crouch"))
+            if (shieldAction.WasPressedThisFrame() || crouchAction.WasPressedThisFrame())
             {
-                if (Input.GetButtonDown("Crouch"))
+                if (crouchAction.WasPressedThisFrame())
                 {
                     _pA.anim.CrossFade("Crouch", 0.0f, 0, 0.0f, 0.0f);
                     isCrouch = true;
                     _pA.ShieldTarget.transform.position = _pA.ShieldTargetCrouch.transform.position;
                 }
-                else if (Input.GetButtonDown("Shield"))
+                else if (shieldAction.WasPressedThisFrame())
                     _pA.ShieldTarget.transform.position = _pA.ShieldTargetStand.transform.position;
-                if (!(Input.GetButtonDown("Shield") && Input.GetButtonDown("Crouch")))
+                if (shieldAction.WasPressedThisFrame() && crouchAction.WasPressedThisFrame())
                 {
                     _pA.ShieldBack.gameObject.SetActive(false);
                     _pA.Shield.SetActive(true);
@@ -413,9 +446,9 @@ public class MovementJumpGravity : State
                     _pA.AngleRig.weight = 1.0f;
                 }
             }
-            else if (Input.GetButtonUp("Shield") || Input.GetButtonUp("Crouch"))
+            else if (shieldAction.WasReleasedThisFrame() || crouchAction.WasReleasedThisFrame())
             {
-                if ((Input.GetButtonUp("Shield") && !Input.GetButton("Crouch")) || (Input.GetButtonUp("Crouch") && !Input.GetButton("Shield")))
+                if ((shieldAction.WasReleasedThisFrame() && !crouchAction.IsPressed()) || (crouchAction.WasReleasedThisFrame() && !shieldAction.IsPressed()))
                 {
                     //Debug.Log("ShieldUp");
                     _pA.HandRig.weight = 0.0f;
@@ -423,7 +456,7 @@ public class MovementJumpGravity : State
                     _pA.Shield.SetActive(false);
                     _pA.ShieldBack.gameObject.SetActive(true);
                 }
-                if (Input.GetButtonUp("Crouch"))
+                if (crouchAction.WasReleasedThisFrame())
                 {
                     //Debug.Log("ShieldUp2");
                     _pA.anim.CrossFade("Strafe", 0.0f, 0, 0.0f, 0.0f);
