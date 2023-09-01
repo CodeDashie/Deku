@@ -438,7 +438,7 @@ public class MovementJumpGravity : State
                 }
                 else if (shieldAction.WasPressedThisFrame())
                     _pA.ShieldTarget.transform.position = _pA.ShieldTargetStand.transform.position;
-                if (shieldAction.WasPressedThisFrame() && crouchAction.WasPressedThisFrame())
+                if (!(shieldAction.WasPressedThisFrame() && crouchAction.WasPressedThisFrame()))
                 {
                     _pA.ShieldBack.gameObject.SetActive(false);
                     _pA.Shield.SetActive(true);
