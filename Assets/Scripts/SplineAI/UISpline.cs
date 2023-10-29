@@ -87,11 +87,12 @@ namespace SplineAI
 
                 trs = Matrix4x4.TRS(transform.parent.transform.position + offsetPos(points[0]), rotation, Vector3.one);
                 Gizmos.matrix = trs;
-                Gizmos.DrawCube(new Vector3(0.0f, points[0].y, ladderWidth * Mathf.Sin(ladder.angle)), new Vector3(ladderWidth, ladderWidth, ladderWidth));
                 
-                Gizmos.DrawCube(new Vector3(0.0f, points[1].y, -ladderWidth * Mathf.Sin(ladder.angle)), new Vector3(ladderWidth, ladderWidth, ladderWidth));
+                Vector3 box = new Vector3(ladderWidth, ladderWidth, ladderWidth);
+                Gizmos.DrawCube(new Vector3(0.0f, points[0].y + ladderWidth, -2.0f), box);
+                Gizmos.DrawCube(new Vector3(0.0f, points[1].y + ladderWidth, 2.0f), box);
+                Gizmos.DrawCube(new Vector3(0.0f, points[1].y + 2.0f, 4.0f), box);
 
-                Gizmos.DrawCube(new Vector3(0.0f, points[1].y + 2.0f, -(ladderWidth + 2.0f) * Mathf.Sin(ladder.angle)), new Vector3(ladderWidth, ladderWidth, ladderWidth));
                 Gizmos.color = Color.white;
             }
         }

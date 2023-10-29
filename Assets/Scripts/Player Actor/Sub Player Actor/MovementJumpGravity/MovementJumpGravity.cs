@@ -18,14 +18,11 @@ public class MovementJumpGravity : State
 
     int jumpLockFrame = 0;
     float jumpLockMag = 0.0f;
-    Vector2 jumpLockSpeedV;
 
     int MoveXAniParaId;
     int MoveZAniParaId;
 
-    SariaInputActions SariaControls;
-
-    Vector2 moveDirection = Vector2.zero;
+    private SariaInputActions SariaControls;
     private InputAction moveAction;
     private InputAction jumpAction;
     private InputAction shieldAction;
@@ -177,6 +174,12 @@ public class MovementJumpGravity : State
     Vector2 magAndVector()
     {
         Vector2 v = moveAction.ReadValue<Vector2>();
+
+        /*if ((v.x > -0.1f && v.x < 0.1f) && ((v.y > -0.1f && v.y < 0.1f)))
+        {
+            v.x = 0.0f;
+            v.y = 0.0f;
+        }*/
 
         // animation speed based on magnitute of input axis
 
